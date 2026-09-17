@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FPL Mini-League Dashboard</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+    body { font-family: Arial, Helvetica, sans-serif; margin: 0; background: #f5f5f7; color: #1f2937; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 24px; }
+    .hero { background: white; border-radius: 18px; padding: 24px; box-shadow: 0 4px 18px rgba(0,0,0,.06); margin-bottom: 20px; }
+    .hero h1 { margin: 0 0 6px; font-size: 30px; }
+    .hero p { margin: 0; color: #6b7280; }
+    .cards { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; margin: 18px 0 22px; }
+    .card { background: white; border-radius: 16px; padding: 18px; box-shadow: 0 4px 18px rgba(0,0,0,.05); }
+    .label { color: #6b7280; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+    .value { font-size: 24px; font-weight: 700; margin-top: 6px; }
+    .small { margin-top: 6px; color: #6b7280; font-size: 13px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .panel { background: white; border-radius: 16px; padding: 18px; box-shadow: 0 4px 18px rgba(0,0,0,.05); }
+    .panel h2 { margin: 0 0 12px; font-size: 18px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 11px 10px; border-bottom: 1px solid #ececec; text-align: left; }
+    th { position: sticky; top: 0; background: white; z-index: 1; }
+    .table-wrap { max-height: 520px; overflow: auto; }
+    .sub { color: #6b7280; font-size: 12px; }
+    .note { color: #6b7280; font-size: 12px; margin-top: 10px; }
+    @media (max-width: 900px) {
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .cards { grid-template-columns: 1fr; }
+      .wrap { padding: 12px; }
+    }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>⚽ FPL Mini-League Dashboard</h1>
+    <p>League 496521 • GW3 + GW4 snapshot</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="label">League Leader</div>
+      <div class="value">Ingenum FC</div>
+      <div class="small">316 pts • Gbenga Akindele</div>
+    </div>
+    <div class="card">
+      <div class="label">GW4 King</div>
+      <div class="value">Cool Roger That CFC</div>
+      <div class="small">99 pts</div>
+    </div>
+    <div class="card">
+      <div class="label">Best 2-Week Run</div>
+      <div class="value">Top Dog FC</div>
+      <div class="small">148 net pts</div>
+    </div>
+    <div class="card">
+      <div class="label">Bench Crime</div>
+      <div class="value">TLARGE</div>
+      <div class="small">32 bench pts in GW4</div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="label">Biggest Climber</div>
+      <div class="value">Cool Roger That CFC</div>
+      <div class="small">+6 places</div>
+    </div>
+    <div class="card">
+      <div class="label">Biggest Faller</div>
+      <div class="value">Super chickens</div>
+      <div class="small">-8 places</div>
+    </div>
+    <div class="card">
+      <div class="label">Current Wooden Spoon</div>
+      <div class="value">Chelsea Hybrid</div>
+      <div class="small">218 pts</div>
+    </div>
+    <div class="card">
+      <div class="label">Money Race</div>
+      <div class="value">99 vs 93</div>
+      <div class="small">Cool Roger That CFC vs Ingenum FC</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <h2>GW4 Points</h2>
+      <div id="gw4Chart" style="height:440px;"></div>
+    </div>
+    <div class="panel">
+      <h2>Rank Movement: GW3 → GW4</h2>
+      <div id="moveChart" style="height:440px;"></div>
+    </div>
+  </div>
+
+  <div class="grid" style="margin-top:18px;">
+    <div class="panel">
+      <h2>GW4 Bench Points</h2>
+      <div id="benchChart" style="height:440px;"></div>
+    </div>
+    <div class="panel">
+      <h2>League Table</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Team</th><th>Total</th><th>GW3</th><th>GW4</th><th>Move</th><th>Bench</th><th>Chip</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>Ingenum FC</strong><br><span class='sub'>Gbenga Akindele</span></td><td>316</td><td>51</td><td>93</td><td>—</td><td>2</td><td></td></tr>
+<tr><td>2</td><td><strong>Cool Roger That CFC</strong><br><span class='sub'>ADEBIYI ADEWALE</span></td><td>311</td><td>52</td><td>99</td><td>▲ 6</td><td>1</td><td></td></tr>
+<tr><td>3</td><td><strong>Lord Zaq FC</strong><br><span class='sub'>Opeyemi Apampa</span></td><td>305</td><td>49</td><td>83</td><td>▼ 1</td><td>9</td><td></td></tr>
+<tr><td>4</td><td><strong>Top Dog FC</strong><br><span class='sub'>Adedotun Somoye</span></td><td>300</td><td>68</td><td>80</td><td>—</td><td>9</td><td></td></tr>
+<tr><td>5</td><td><strong>Gambit FC</strong><br><span class='sub'>Tito Sols</span></td><td>292</td><td>59</td><td>73</td><td>—</td><td>12</td><td></td></tr>
+<tr><td>6</td><td><strong>Carrick Ball</strong><br><span class='sub'>Balogun Abraham</span></td><td>290</td><td>50</td><td>77</td><td>▲ 1</td><td>18</td><td></td></tr>
+<tr><td>7</td><td><strong>PF Lyon Squad</strong><br><span class='sub'>Peks Fowler</span></td><td>288</td><td>57</td><td>76</td><td>▲ 1</td><td>9</td><td></td></tr>
+<tr><td>8</td><td><strong>Black&#x27;s Team</strong><br><span class='sub'>Black Lols</span></td><td>287</td><td>68</td><td>70</td><td>▼ 2</td><td>19</td><td></td></tr>
+<tr><td>9</td><td><strong>Royal Tee FC</strong><br><span class='sub'>Tunde Oniru</span></td><td>278</td><td>41</td><td>77</td><td>▲ 2</td><td>32</td><td></td></tr>
+<tr><td>10</td><td><strong>Kayzie Destroyers</strong><br><span class='sub'>Kayode Adeyeye</span></td><td>276</td><td>42</td><td>79</td><td>▲ 3</td><td>8</td><td></td></tr>
+<tr><td>11</td><td><strong>Super chickens</strong><br><span class='sub'>Adeolu Adeniyi</span></td><td>270</td><td>56</td><td>49</td><td>▼ 8</td><td>10</td><td></td></tr>
+<tr><td>12</td><td><strong>Vykteferrary</strong><br><span class='sub'>Victor Okpara</span></td><td>267</td><td>58</td><td>60</td><td>▼ 2</td><td>0</td><td></td></tr>
+<tr><td>13</td><td><strong>Carrickball FC</strong><br><span class='sub'>Tosin Femi</span></td><td>267</td><td>44</td><td>86</td><td>▲ 4</td><td>18</td><td></td></tr>
+<tr><td>14</td><td><strong>TLARGE</strong><br><span class='sub'>OBA Olaniyi</span></td><td>260</td><td>50</td><td>61</td><td>▼ 2</td><td>32</td><td></td></tr>
+<tr><td>15</td><td><strong>Gbola&#x27;s Team</strong><br><span class='sub'>Gbola Adedamola</span></td><td>260</td><td>45</td><td>74</td><td>—</td><td>1</td><td></td></tr>
+<tr><td>16</td><td><strong>Babatee Unlimited</strong><br><span class='sub'>Babatope Adebajo</span></td><td>252</td><td>48</td><td>83</td><td>▲ 1</td><td>23</td><td></td></tr>
+<tr><td>17</td><td><strong>OWYN</strong><br><span class='sub'>Teddy Wright</span></td><td>246</td><td>51</td><td>83</td><td>▲ 2</td><td>17</td><td></td></tr>
+<tr><td>18</td><td><strong>DisSeason FC</strong><br><span class='sub'>Yomi Fowler</span></td><td>231</td><td>49</td><td>67</td><td>—</td><td>4</td><td></td></tr>
+<tr><td>19</td><td><strong>21FC</strong><br><span class='sub'>Adeleke Adesanya</span></td><td>225</td><td>32</td><td>68</td><td>▲ 1</td><td>8</td><td></td></tr>
+<tr><td>20</td><td><strong>tete-a-tete</strong><br><span class='sub'>Tunde Agbeja</span></td><td>222</td><td>50</td><td>39</td><td>▼ 5</td><td>0</td><td></td></tr>
+<tr><td>21</td><td><strong>B.K d Gunner</strong><br><span class='sub'>Abiodun Kasomo</span></td><td>221</td><td>58</td><td>76</td><td>▲ 1</td><td>9</td><td></td></tr>
+<tr><td>22</td><td><strong>Chelsea Hybrid</strong><br><span class='sub'>Tempo Fowlee</span></td><td>218</td><td>31</td><td>68</td><td>▼ 1</td><td>9</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">Movement is reconstructed from the historical totals in your collector output.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const gw4 = [{"team_name": "Cool Roger That CFC", "gw4_points": 99}, {"team_name": "Ingenum FC", "gw4_points": 93}, {"team_name": "Carrickball FC", "gw4_points": 86}, {"team_name": "Lord Zaq FC", "gw4_points": 83}, {"team_name": "Babatee Unlimited", "gw4_points": 83}, {"team_name": "OWYN", "gw4_points": 83}, {"team_name": "Top Dog FC", "gw4_points": 80}, {"team_name": "Kayzie Destroyers", "gw4_points": 79}, {"team_name": "Royal Tee FC", "gw4_points": 77}, {"team_name": "Carrick Ball", "gw4_points": 77}, {"team_name": "PF Lyon Squad", "gw4_points": 76}, {"team_name": "B.K d Gunner", "gw4_points": 76}, {"team_name": "Gbola's Team", "gw4_points": 74}, {"team_name": "Gambit FC", "gw4_points": 73}, {"team_name": "Black's Team", "gw4_points": 70}, {"team_name": "Chelsea Hybrid", "gw4_points": 68}, {"team_name": "21FC", "gw4_points": 68}, {"team_name": "DisSeason FC", "gw4_points": 67}, {"team_name": "TLARGE", "gw4_points": 61}, {"team_name": "Vykteferrary", "gw4_points": 60}, {"team_name": "Super chickens", "gw4_points": 49}, {"team_name": "tete-a-tete", "gw4_points": 39}];
+Plotly.newPlot('gw4Chart', [{
+  x: gw4.map(d => d.gw4_points).reverse(),
+  y: gw4.map(d => d.team_name).reverse(),
+  type: 'bar',
+  orientation: 'h',
+  hovertemplate: '%{y}<br>%{x} pts<extra></extra>'
+}], {
+  margin: {l: 150, r: 20, t: 10, b: 40},
+  xaxis: {title: 'GW4 points'},
+  yaxis: {automargin: true}
+}, {displayModeBar:false, responsive:true});
+
+const movement = [{"team_name": "Cool Roger That CFC", "rank_change": 6}, {"team_name": "Carrickball FC", "rank_change": 4}, {"team_name": "Kayzie Destroyers", "rank_change": 3}, {"team_name": "Royal Tee FC", "rank_change": 2}, {"team_name": "OWYN", "rank_change": 2}, {"team_name": "Carrick Ball", "rank_change": 1}, {"team_name": "21FC", "rank_change": 1}, {"team_name": "B.K d Gunner", "rank_change": 1}, {"team_name": "Babatee Unlimited", "rank_change": 1}, {"team_name": "PF Lyon Squad", "rank_change": 1}, {"team_name": "DisSeason FC", "rank_change": 0}, {"team_name": "Gambit FC", "rank_change": 0}, {"team_name": "Top Dog FC", "rank_change": 0}, {"team_name": "Ingenum FC", "rank_change": 0}, {"team_name": "Gbola's Team", "rank_change": 0}, {"team_name": "Lord Zaq FC", "rank_change": -1}, {"team_name": "Chelsea Hybrid", "rank_change": -1}, {"team_name": "Black's Team", "rank_change": -2}, {"team_name": "Vykteferrary", "rank_change": -2}, {"team_name": "TLARGE", "rank_change": -2}, {"team_name": "tete-a-tete", "rank_change": -5}, {"team_name": "Super chickens", "rank_change": -8}];
+Plotly.newPlot('moveChart', [{
+  x: movement.map(d => d.rank_change),
+  y: movement.map(d => d.team_name),
+  type: 'bar',
+  orientation: 'h',
+  hovertemplate: '%{y}<br>%{x} places<extra></extra>'
+}], {
+  margin: {l: 150, r: 20, t: 10, b: 40},
+  xaxis: {title: 'Places gained / lost', zeroline: true},
+  yaxis: {automargin: true}
+}, {displayModeBar:false, responsive:true});
+
+const bench = [{"team_name": "TLARGE", "gw4_bench_points": 32}, {"team_name": "Royal Tee FC", "gw4_bench_points": 32}, {"team_name": "Babatee Unlimited", "gw4_bench_points": 23}, {"team_name": "Black's Team", "gw4_bench_points": 19}, {"team_name": "Carrick Ball", "gw4_bench_points": 18}, {"team_name": "Carrickball FC", "gw4_bench_points": 18}, {"team_name": "OWYN", "gw4_bench_points": 17}, {"team_name": "Gambit FC", "gw4_bench_points": 12}, {"team_name": "Super chickens", "gw4_bench_points": 10}, {"team_name": "Top Dog FC", "gw4_bench_points": 9}, {"team_name": "B.K d Gunner", "gw4_bench_points": 9}, {"team_name": "Chelsea Hybrid", "gw4_bench_points": 9}, {"team_name": "Lord Zaq FC", "gw4_bench_points": 9}, {"team_name": "PF Lyon Squad", "gw4_bench_points": 9}, {"team_name": "21FC", "gw4_bench_points": 8}, {"team_name": "Kayzie Destroyers", "gw4_bench_points": 8}, {"team_name": "DisSeason FC", "gw4_bench_points": 4}, {"team_name": "Ingenum FC", "gw4_bench_points": 2}, {"team_name": "Cool Roger That CFC", "gw4_bench_points": 1}, {"team_name": "Gbola's Team", "gw4_bench_points": 1}, {"team_name": "Vykteferrary", "gw4_bench_points": 0}, {"team_name": "tete-a-tete", "gw4_bench_points": 0}];
+Plotly.newPlot('benchChart', [{
+  x: bench.map(d => d.gw4_bench_points).reverse(),
+  y: bench.map(d => d.team_name).reverse(),
+  type: 'bar',
+  orientation: 'h',
+  hovertemplate: '%{y}<br>%{x} bench pts<extra></extra>'
+}], {
+  margin: {l: 150, r: 20, t: 10, b: 40},
+  xaxis: {title: 'GW4 bench points'},
+  yaxis: {automargin: true}
+}, {displayModeBar:false, responsive:true});
+</script>
+</body>
+</html>
