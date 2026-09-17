@@ -1,0 +1,464 @@
+<title>Tosin Owobo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f4f5f2;
+    --surface: #ffffff;
+    --surface-2: #ebede7;
+    --text: #161a20;
+    --text-muted: #5a6270;
+    --border: #d9dcd4;
+    --accent: #a85e18;
+    --accent-soft: #f0e2cd;
+    --accent2: #316775;
+    --status: #3f7a4d;
+    --status-soft: #e2ecdf;
+    --shadow: 0 1px 2px rgba(22,26,32,0.04), 0 8px 24px -12px rgba(22,26,32,0.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #0d1117;
+      --surface: #141a21;
+      --surface-2: #1b232c;
+      --text: #e9ebee;
+      --text-muted: #929aa5;
+      --border: #262f3a;
+      --accent: #e3a349;
+      --accent-soft: #3a2c17;
+      --accent2: #6fb0bd;
+      --status: #6fbf82;
+      --status-soft: #1c2a1f;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px -14px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #0d1117;
+    --surface: #141a21;
+    --surface-2: #1b232c;
+    --text: #e9ebee;
+    --text-muted: #929aa5;
+    --border: #262f3a;
+    --accent: #e3a349;
+    --accent-soft: #3a2c17;
+    --accent2: #6fb0bd;
+    --status: #6fbf82;
+    --status-soft: #1c2a1f;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px -14px rgba(0,0,0,0.55);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent-soft); color:var(--text); }
+
+  a{ color:var(--accent); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+
+  .mono{ font-family:"IBM Plex Mono", ui-monospace, monospace; }
+
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- Nav ---------- */
+  header.topbar{
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .topbar .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:56px;
+  }
+  .brand{
+    font-family:"IBM Plex Mono"; font-size:13px; color:var(--text-muted);
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .dot{ width:7px;height:7px;border-radius:50%; background:var(--status); box-shadow:0 0 0 3px var(--status-soft); }
+  nav.links{ display:flex; gap:22px; }
+  nav.links a{ color:var(--text-muted); font-size:14px; font-weight:500; }
+  nav.links a:hover{ color:var(--text); text-decoration:none; }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:64px 0 56px; }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.15fr 1fr; gap:44px; align-items:center;
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono"; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--accent2); margin:0 0 14px;
+  }
+  h1.name{
+    font-family:"Big Shoulders Display"; font-weight:800;
+    font-size:clamp(46px, 7vw, 74px); line-height:0.92; letter-spacing:0.005em;
+    margin:0 0 6px; text-wrap:balance;
+  }
+  .role{
+    font-size:19px; font-weight:600; color:var(--text); margin:0 0 16px;
+  }
+  .role .accent-word{ color:var(--accent); }
+  .lede{
+    color:var(--text-muted); font-size:15.5px; max-width:54ch; margin:0 0 26px;
+  }
+  .cta-row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .btn{
+    font-family:"IBM Plex Mono"; font-size:13.5px; font-weight:500;
+    padding:10px 16px; border-radius:6px; border:1px solid var(--border);
+    background:var(--surface); color:var(--text); display:inline-flex; align-items:center; gap:8px;
+    box-shadow:var(--shadow);
+  }
+  .btn:hover{ text-decoration:none; border-color:var(--accent2); }
+  .btn.primary{ background:var(--text); color:var(--bg); border-color:var(--text); }
+  .btn.primary:hover{ opacity:0.9; }
+  .btn.small{ padding:7px 12px; font-size:12.5px; box-shadow:none; }
+
+  /* PowerShell / Graph-styled console card */
+  .tfcard{
+    background:var(--surface); border:1px solid var(--border); border-radius:10px;
+    box-shadow:var(--shadow); overflow:hidden;
+  }
+  .tfcard .tfhead{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 14px; border-bottom:1px solid var(--border); background:var(--surface-2);
+  }
+  .tfcard .tfhead span{ font-family:"IBM Plex Mono"; font-size:11.5px; color:var(--text-muted); }
+  .tfdots{ display:flex; gap:6px; }
+  .tfdots i{ width:9px;height:9px;border-radius:50%; background:var(--border); display:block; }
+  .tfbody{ padding:18px 18px 20px; font-family:"IBM Plex Mono"; font-size:13.2px; line-height:1.85; }
+  .tfbody .kw{ color:var(--accent2); }
+  .tfbody .str{ color:var(--accent); }
+  .tfbody .cm{ color:var(--text-muted); }
+  .tfbody .prompt{ color:var(--status); }
+  .tfbody .row{ display:flex; gap:10px; }
+  .tfbody .row .k{ color:var(--text-muted); min-width:15ch; }
+  .tfbody .row .v{ color:var(--text); }
+
+  /* ---------- Section shell ---------- */
+  section{ padding:52px 0; border-top:1px solid var(--border); }
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:28px; }
+  .sec-num{ font-family:"IBM Plex Mono"; color:var(--text-muted); font-size:13px; }
+  h2.sec-title{
+    font-family:"Big Shoulders Display"; font-weight:700; font-size:30px;
+    margin:0; text-transform:uppercase; letter-spacing:0.01em;
+  }
+
+  /* ---------- Profile ---------- */
+  .profile p{ max-width:70ch; font-size:16px; }
+  .profile p + p{ margin-top:14px; }
+  .stat-row{ display:flex; gap:28px; margin-top:26px; flex-wrap:wrap; }
+  .stat{ min-width:120px; }
+  .stat .num{ font-family:"Big Shoulders Display"; font-weight:700; font-size:34px; color:var(--accent); line-height:1; }
+  .stat .lbl{ font-family:"IBM Plex Mono"; font-size:12px; color:var(--text-muted); margin-top:4px; }
+
+  /* ---------- Timeline (deployment log) ---------- */
+  .timeline{ position:relative; padding-left:26px; }
+  .timeline::before{
+    content:""; position:absolute; left:5px; top:6px; bottom:6px; width:2px;
+    background:linear-gradient(var(--border), var(--border) 90%, transparent);
+  }
+  .entry{ position:relative; padding-bottom:32px; }
+  .entry:last-child{ padding-bottom:0; }
+  .entry::before{
+    content:""; position:absolute; left:-26px; top:5px; width:12px; height:12px; border-radius:50%;
+    background:var(--surface); border:2px solid var(--accent2);
+  }
+  .entry.current::before{ border-color:var(--status); box-shadow:0 0 0 3px var(--status-soft); }
+  .entry-head{ display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 12px; margin-bottom:6px; }
+  .entry-title{ font-weight:700; font-size:17px; }
+  .entry-org{ color:var(--accent2); font-weight:600; }
+  .entry-meta{ font-family:"IBM Plex Mono"; font-size:12px; color:var(--text-muted); margin-left:auto; white-space:nowrap; }
+  .entry ul{ margin:8px 0 0; padding-left:18px; }
+  .entry li{ color:var(--text-muted); margin-bottom:5px; font-size:14.5px; }
+  .entry li::marker{ color:var(--accent2); }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .tag{
+    font-family:"IBM Plex Mono"; font-size:11px; color:var(--text-muted);
+    border:1px solid var(--border); border-radius:4px; padding:2px 7px;
+  }
+
+  /* ---------- Skills ---------- */
+  .skill-groups{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:22px 28px; }
+  .skill-group h3{
+    font-family:"IBM Plex Mono"; font-size:12px; text-transform:uppercase; letter-spacing:0.05em;
+    color:var(--text-muted); margin:0 0 10px; font-weight:600;
+  }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:7px; }
+  .chip{
+    font-size:13px; padding:5px 10px; border-radius:5px; background:var(--surface-2);
+    border:1px solid var(--border); color:var(--text);
+  }
+  .skill-group.minor{ opacity:0.82; }
+  .skill-group.minor .chip{ background:transparent; }
+  .certs{ margin-top:30px; padding-top:22px; border-top:1px dashed var(--border); }
+  .certs h3{ font-family:"IBM Plex Mono"; font-size:12px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); margin:0 0 12px; font-weight:600;}
+  .cert-row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .cert{
+    display:flex; align-items:center; gap:7px; font-size:13.5px; font-weight:500;
+    padding:7px 12px; border-radius:20px; border:1px solid var(--accent2); color:var(--accent2);
+  }
+  .cert svg{ width:13px; height:13px; flex:none; }
+
+  /* ---------- Also on GitHub (demoted) ---------- */
+  .aside-card{
+    display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
+    border:1px solid var(--border); border-radius:10px; background:var(--surface);
+    padding:16px 20px;
+  }
+  .aside-card .label{ font-family:"IBM Plex Mono"; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.04em; margin:0 0 4px; }
+  .aside-card p{ margin:0; font-size:14px; color:var(--text-muted); max-width:56ch; }
+  .aside-card strong{ color:var(--text); }
+
+  /* ---------- Contact / endpoint ---------- */
+  .endpoint{
+    background:var(--surface); border:1px solid var(--border); border-radius:10px;
+    box-shadow:var(--shadow); overflow:hidden;
+  }
+  .endpoint .req{
+    font-family:"IBM Plex Mono"; font-size:13px; padding:12px 18px; border-bottom:1px solid var(--border);
+    background:var(--surface-2); color:var(--text-muted);
+  }
+  .endpoint .req .verb{ color:var(--status); font-weight:600; }
+  .endpoint .res{ padding:20px 18px; font-family:"IBM Plex Mono"; font-size:13.5px; line-height:1.8; }
+  .endpoint .res .k{ color:var(--text-muted); }
+  .endpoint .res .v a{ color:var(--accent); font-weight:500; }
+  .endpoint .res .v{ color:var(--text); }
+
+  footer{ padding:36px 0 60px; }
+  footer .wrap{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-family:"IBM Plex Mono"; font-size:12px; color:var(--text-muted);
+  }
+
+  @media (max-width: 760px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .entry-meta{ margin-left:0; }
+    nav.links{ display:none; }
+  }
+</style>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span> tosin-owobo <span style="color:var(--border)">/</span> azure-administrator</div>
+    <nav class="links">
+      <a href="#profile">Profile</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Calgary, AB, Canada &nbsp;·&nbsp; Open to in-house / on-site &amp; hybrid roles</p>
+        <h1 class="name">Tosin<br>Owobo</h1>
+        <p class="role">Azure Administrator — <span class="accent-word">Identity, Microsoft 365 &amp; Application Support</span></p>
+        <p class="lede">Entra ID and IAM-focused Azure administrator with 5+ years of cloud and systems administration inside a broader 12-year IT support career. Administers identities, RBAC, and enterprise application access day to day — and automates the routine parts with PowerShell, Python, and ARM templates, including support for production AKS workloads.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="https://www.linkedin.com/in/owobo-tosin/" target="_blank" rel="noopener">↗ LinkedIn</a>
+          <a class="btn" href="mailto:owobotosin@yahoo.com">✉ owobotosin@yahoo.com</a>
+          <a class="btn" href="https://github.com/Teeowo" target="_blank" rel="noopener">↗ github.com/Teeowo</a>
+        </div>
+      </div>
+      <div class="tfcard">
+        <div class="tfhead">
+          <div class="tfdots"><i></i><i></i><i></i></div>
+          <span>Microsoft Graph PowerShell</span>
+        </div>
+        <div class="tfbody">
+          <div><span class="prompt">PS C:\&gt;</span> Get-MgUser -UserId "towobo" | Format-List</div>
+          <div class="row"><span class="k">DisplayName</span><span class="v">: Tosin Owobo</span></div>
+          <div class="row"><span class="k">JobTitle</span><span class="v">: Azure Administrator</span></div>
+          <div class="row"><span class="k">Department</span><span class="v">: IT Operations &amp; Support</span></div>
+          <div class="row"><span class="k">OfficeLocation</span><span class="v">: Calgary, AB</span></div>
+          <div class="row"><span class="k">AccountEnabled</span><span class="v" style="color:var(--status)">: True</span></div>
+          <div class="cm">&#35; Entra ID · RBAC · ARM · PowerShell · Python</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="profile" class="profile">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">Profile</h2></div>
+      <p>Microsoft Entra ID and IAM-focused Azure administrator with 5+ years of cloud and systems administration experience and a broader background in enterprise IT support. Hands-on administering Entra ID identities, enterprise applications, RBAC, PIM, managed and workload identities, service accounts, application permissions, SAML and OAuth integrations, Microsoft 365, and access lifecycle processes.</p>
+      <p>Experienced onboarding and supporting enterprise applications, troubleshooting authentication and authorization issues, validating access across environments, and documenting technical procedures — collaborating closely with developers, security, infrastructure, QA, and business stakeholders. Comfortable taking ownership of established operational processes and driving work independently through implementation, testing, troubleshooting, and support.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="num">12</div><div class="lbl">years in IT &amp; cloud</div></div>
+        <div class="stat"><div class="num">5+</div><div class="lbl">years Azure/IAM admin</div></div>
+        <div class="stat"><div class="num">10+</div><div class="lbl">enterprise tenants supported</div></div>
+        <div class="stat"><div class="num">3</div><div class="lbl">certifications</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Experience</h2></div>
+      <div class="timeline">
+
+        <div class="entry current">
+          <div class="entry-head">
+            <span class="entry-title">Azure Cloud and Infrastructure Engineer</span>
+            <span class="entry-org">· Arborsys Group</span>
+            <span class="entry-meta">Feb 2023 — Present · New Jersey, USA</span>
+          </div>
+          <ul>
+            <li>Administer Microsoft Entra ID identity and access across enterprise Azure tenants — users, groups, RBAC, privileged access, workload identities, managed identities, service accounts, and application permissions.</li>
+            <li>Configure and support authentication and authorization solutions using SAML, OAuth, RBAC, workload/managed identities, and Azure Key Vault for enterprise application integrations.</li>
+            <li>Troubleshoot complex identity and access issues — authentication failures, SSO problems, certificate errors, access-control and service identity failures.</li>
+            <li>Automate routine administration with PowerShell, Python, and ARM templates — provisioning, access configuration, alert changes, and operational validation.</li>
+            <li>Support production AKS workloads integrated with Microsoft Entra ID, workload identity, Key Vault, RBAC, Kubernetes secrets, and TLS certificates.</li>
+            <li>Administer network security across VNets, subnets, private endpoints, Azure Firewall, and WAF to isolate regulated client workloads.</li>
+          </ul>
+          <div class="tag-row"><span class="tag">Entra ID</span><span class="tag">RBAC / PIM</span><span class="tag">SAML / OAuth</span><span class="tag">PowerShell / Python</span><span class="tag">ARM Templates</span><span class="tag">AKS support</span></div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">Cloud Support Engineer</span>
+            <span class="entry-org">· CANA Construction Limited</span>
+            <span class="entry-meta">Jan 2022 — Jan 2023 · Calgary, Canada</span>
+          </div>
+          <ul>
+            <li>Managed end-to-end onboarding for new hires — Entra ID accounts, Microsoft 365 E3/E5 licensing, group and resource access, day-one readiness.</li>
+            <li>Onboarded laptops and phones into Microsoft Intune: Win32/EXE/MSI app packaging, Windows Autopilot zero-touch provisioning, compliance policies, staged deployment rings.</li>
+            <li>Created and maintained Azure RBAC assignments and custom roles aligned to business requirements and least-privilege access principles.</li>
+            <li>Automated user folder provisioning and access permissions with PowerShell; administered Azure subscriptions, resource groups, and RBAC.</li>
+            <li>Set up workstations and provided on-call IT support across hardware, software, connectivity, and access issues for site staff.</li>
+          </ul>
+          <div class="tag-row"><span class="tag">Microsoft 365</span><span class="tag">Intune</span><span class="tag">Autopilot</span><span class="tag">PowerShell</span></div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">Systems Consultant</span>
+            <span class="entry-org">· Long View Systems</span>
+            <span class="entry-meta">Feb 2021 — Dec 2021 · Calgary, Canada</span>
+          </div>
+          <ul>
+            <li>Managed identity lifecycle across Active Directory and Entra ID — onboarding, offboarding, group assignment, license provisioning.</li>
+            <li>Led a Tier 1/2 support team: ticket triage, mentoring, and vendor escalation through to resolution.</li>
+          </ul>
+          <div class="tag-row"><span class="tag">Active Directory</span><span class="tag">Entra ID</span><span class="tag">Tier 1/2</span></div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">Superintendent, IT Services</span>
+            <span class="entry-org">· Economic and Financial Crimes Commission</span>
+            <span class="entry-meta">Nov 2014 — Sep 2019 · Lagos, Nigeria</span>
+          </div>
+          <ul>
+            <li>Administered Active Directory via PowerShell — user setup, group policy, role and folder-permission (RWED) assignment.</li>
+            <li>Ran onboarding/offboarding at scale across AD, SAP, and internal systems in a regulated agency.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Skills &amp; Tooling</h2></div>
+      <div class="skill-groups">
+        <div class="skill-group">
+          <h3>Identity &amp; Access</h3>
+          <div class="chip-row"><span class="chip">Microsoft Entra ID</span><span class="chip">Active Directory</span><span class="chip">RBAC</span><span class="chip">PIM</span><span class="chip">Key Vault</span><span class="chip">SAML</span><span class="chip">OAuth</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Microsoft 365</h3>
+          <div class="chip-row"><span class="chip">E3 / E5 licensing</span><span class="chip">User provisioning</span><span class="chip">Group &amp; access admin</span><span class="chip">M365 support</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Endpoint Management</h3>
+          <div class="chip-row"><span class="chip">Microsoft Intune</span><span class="chip">Windows Autopilot</span><span class="chip">Win32 / EXE / MSI packaging</span><span class="chip">MDM</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Azure Administration</h3>
+          <div class="chip-row"><span class="chip">Subscriptions</span><span class="chip">Resource groups</span><span class="chip">Management groups</span><span class="chip">Azure Policy</span><span class="chip">VMs</span><span class="chip">Storage</span><span class="chip">App Services</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Automation &amp; Scripting</h3>
+          <div class="chip-row"><span class="chip">PowerShell</span><span class="chip">Python</span><span class="chip">Bash</span><span class="chip">ARM Templates</span><span class="chip">Terraform</span><span class="chip">Bicep</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Monitoring &amp; Security</h3>
+          <div class="chip-row"><span class="chip">Azure Monitor</span><span class="chip">Log Analytics</span><span class="chip">Application Insights</span><span class="chip">Microsoft Sentinel</span><span class="chip">KQL</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>IT Support &amp; Operations</h3>
+          <div class="chip-row"><span class="chip">Tier 1–2 support</span><span class="chip">On-call support</span><span class="chip">Incident response</span><span class="chip">RCA</span><span class="chip">Knowledge base authoring</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Networking</h3>
+          <div class="chip-row"><span class="chip">VNets / subnets</span><span class="chip">Private endpoints</span><span class="chip">Azure Firewall</span><span class="chip">WAF</span><span class="chip">VPN / site connectivity</span></div>
+        </div>
+        <div class="skill-group minor">
+          <h3>CI/CD &amp; Containers</h3>
+          <div class="chip-row"><span class="chip">Azure DevOps Pipelines</span><span class="chip">GitHub Actions</span><span class="chip">AKS</span><span class="chip">Docker</span><span class="chip">Helm</span></div>
+        </div>
+        <div class="skill-group minor">
+          <h3>Governance &amp; Cost</h3>
+          <div class="chip-row"><span class="chip">Resource tagging</span><span class="chip">Reserved instances</span><span class="chip">Right-sizing</span><span class="chip">Compliance baselines</span></div>
+        </div>
+      </div>
+
+      <div class="certs">
+        <h3>Certifications</h3>
+        <div class="cert-row">
+          <span class="cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Azure Administrator Associate</span>
+          <span class="cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Azure Data Engineer Associate</span>
+          <span class="cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>CompTIA Security+</span>
+        </div>
+      </div>
+
+      <div class="aside-card" style="margin-top:26px;">
+        <div>
+          <p class="label">Also on GitHub</p>
+          <p><strong>Azure ↔ GCP paved-road practice repo</strong> — a personal Terraform/Kubernetes build exercise. At work, AKS shows up on the identity and support side above, not cluster provisioning.</p>
+        </div>
+        <a class="btn small" href="https://github.com/Teeowo/boutique-microservices-project" target="_blank" rel="noopener">↗ View repo</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Contact</h2></div>
+      <div class="endpoint">
+        <div class="req"><span class="verb">GET</span> /tosin-owobo/contact</div>
+        <div class="res">
+          <div><span class="k">email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="v"><a href="mailto:owobotosin@yahoo.com">owobotosin@yahoo.com</a></span></div>
+          <div><span class="k">linkedin</span>&nbsp;&nbsp;&nbsp;: <span class="v"><a href="https://www.linkedin.com/in/owobo-tosin/" target="_blank" rel="noopener">linkedin.com/in/owobo-tosin</a></span></div>
+          <div><span class="k">github</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="v"><a href="https://github.com/Teeowo" target="_blank" rel="noopener">github.com/Teeowo</a></span></div>
+          <div><span class="k">location</span>&nbsp;&nbsp;&nbsp;: <span class="v">Calgary, AB, Canada</span></div>
+          <div><span class="k">status</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="v" style="color:var(--status)">200 available for in-house opportunities</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Tosin Owobo</span>
+    <span>SAIT — Information Technology, Calgary · Azure Administration &amp; Support</span>
+  </div>
+</footer>
