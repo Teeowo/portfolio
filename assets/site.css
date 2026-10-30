@@ -314,11 +314,9 @@
 
   /* ---------- Share ---------- */
   .share{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
-  .share .btn{ cursor:pointer; font:inherit; font-family:"IBM Plex Mono"; font-size:12.5px; }
-  .share-btn{ background:var(--text); color:var(--bg); border-color:var(--text); }
-  .share-btn:hover{ opacity:0.9; }
+  button.btn{ cursor:pointer; line-height:inherit; margin:0; -webkit-appearance:none; appearance:none; }
   .share-status{ position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
-  .share-btn .share-label{ display:inline-block; min-width:8ch; text-align:left; }
+  .share-btn .share-label{ display:inline-block; min-width:6ch; text-align:left; }
   .post-share{ margin-top:16px; }
   .post-share.end{ margin-top:40px; padding:18px 20px; border:1px solid var(--border); border-radius:10px; background:var(--surface); }
   .post-share.end p{ margin:0 0 10px; font-weight:600; }

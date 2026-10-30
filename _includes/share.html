@@ -16,7 +16,7 @@
   var url = box.dataset.url, title = box.dataset.title;
   var label = btn.querySelector('.share-label');
   function say(msg){
-    status.textContent = msg; label.textContent = '\u2713 Copied';
+    status.textContent = msg; label.textContent = 'Copied';
     clearTimeout(say.t); say.t = setTimeout(function(){ status.textContent = ''; label.textContent = 'Share'; }, 2000);
   }
   function copy(){
