@@ -1,0 +1,25 @@
+title: Tosin Owobo
+description: Azure cloud engineer. Identity, infrastructure and the things I build.
+url: https://tosinowobo.com
+author: Tosin Owobo
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    disable: true
+permalink: /ai-engineering/:year/:month/:day/:title/
+plugins:
+  - jekyll-feed
+feed:
+  path: ai-engineering/feed.xml
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      section: ai

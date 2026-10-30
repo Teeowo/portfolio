@@ -1,0 +1,35 @@
+---
+layout: default
+section: ai
+title: AI Engineering
+summary: A weekly build log of what I'm building and learning with AI, from agent workflows to LLM tools for cloud operations.
+---
+<section class="hero ai-hero">
+  <div class="wrap">
+    <p class="eyebrow">Weekly build log</p>
+    <h1 class="name">AI Engineering</h1>
+    <p class="lede">What I'm building and learning with AI each week: agent workflows, LLM tools for cloud and DevOps work, and what actually holds up once it meets real problems.</p>
+    <div class="cta-row">
+      <a class="btn" href="/ai-engineering/feed.xml">⌁ RSS feed</a>
+      <a class="btn" href="/#projects">← Projects</a>
+    </div>
+  </div>
+</section>
+
+<section class="ai-log">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">{{ site.posts.size }}</span><h2 class="sec-title">Updates</h2></div>
+    <ol class="log">
+      {% for post in site.posts %}
+      <li class="log-item">
+        <div class="log-meta"><span class="wk">Week {{ post.week }}</span><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time></div>
+        <div>
+          <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+          {% if post.summary %}<p>{{ post.summary }}</p>{% endif %}
+          {% if post.tags.size > 0 %}<div class="tag-row">{% for t in post.tags %}<span class="tag">{{ t }}</span>{% endfor %}</div>{% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
