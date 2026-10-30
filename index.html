@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tosin Owobo</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -153,6 +154,7 @@
 
   /* ---------- Section shell ---------- */
   section{ padding:52px 0; border-top:1px solid var(--border); }
+  section[id]{ scroll-margin-top:56px; }
   .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:28px; }
   .sec-num{ font-family:"IBM Plex Mono"; color:var(--text-muted); font-size:13px; }
   h2.sec-title{
@@ -194,6 +196,48 @@
     border:1px solid var(--border); border-radius:4px; padding:2px 7px;
   }
 
+
+  /* ---------- Projects ---------- */
+  .proj-intro{ color:var(--text-muted); max-width:70ch; margin:-12px 0 26px; font-size:15px; }
+  .proj-group{ margin-bottom:34px; }
+  .proj-group:last-child{ margin-bottom:0; }
+  .proj-group > h3{
+    font-family:"IBM Plex Mono"; font-size:12px; text-transform:uppercase; letter-spacing:0.05em;
+    color:var(--text-muted); margin:0 0 14px; font-weight:600;
+  }
+  .proj-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap:18px; }
+  .proj{
+    display:flex; flex-direction:column; gap:10px;
+    background:var(--surface); border:1px solid var(--border); border-radius:10px;
+    box-shadow:var(--shadow); padding:20px 20px 18px;
+    transition:border-color .15s ease;
+  }
+  .proj:hover{ border-color:var(--accent2); }
+  .proj-grid > .proj:last-child:nth-child(odd){ grid-column:1 / -1; }
+  .proj-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .proj h4{ margin:0; font-size:17px; font-weight:700; line-height:1.3; }
+  .badge{
+    font-family:"IBM Plex Mono"; font-size:11px; padding:2px 8px; border-radius:20px; white-space:nowrap;
+    border:1px solid var(--border); color:var(--text-muted);
+  }
+  .badge.live{ color:var(--status); background:var(--status-soft); border-color:transparent; }
+  .badge.working{ color:var(--accent2); border-color:var(--accent2); }
+  .badge.wip{ color:var(--accent); border-color:var(--accent); }
+  .proj p{ margin:0; font-size:14.5px; color:var(--text-muted); }
+  .proj ul{ margin:0; padding-left:18px; }
+  .proj li{ font-size:13.8px; color:var(--text); margin-bottom:4px; }
+  .proj li::marker{ color:var(--accent2); }
+  .proj .tag-row{ margin-top:auto; padding-top:6px; }
+  .proj-video{
+    display:block; border:1px solid var(--border); border-radius:8px; overflow:hidden; background:var(--surface-2); color:var(--text);
+  }
+  .proj-video:hover{ text-decoration:none; border-color:var(--accent2); }
+  .proj-video img{ display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; }
+  .proj-video-cap{ display:flex; gap:8px; align-items:baseline; padding:9px 12px; font-size:13.5px; font-weight:500; }
+  .proj-video-cap .play{ color:var(--accent); font-size:11px; }
+  .proj-links{ display:flex; gap:8px; flex-wrap:wrap; }
+  .proj-note{ font-family:"IBM Plex Mono"; font-size:11.5px; color:var(--text-muted); }
+
   /* ---------- Skills ---------- */
   .skill-groups{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:22px 28px; }
   .skill-group h3{
@@ -215,16 +259,6 @@
     padding:7px 12px; border-radius:20px; border:1px solid var(--accent2); color:var(--accent2);
   }
   .cert svg{ width:13px; height:13px; flex:none; }
-
-  /* ---------- Also on GitHub (demoted) ---------- */
-  .aside-card{
-    display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
-    border:1px solid var(--border); border-radius:10px; background:var(--surface);
-    padding:16px 20px;
-  }
-  .aside-card .label{ font-family:"IBM Plex Mono"; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.04em; margin:0 0 4px; }
-  .aside-card p{ margin:0; font-size:14px; color:var(--text-muted); max-width:56ch; }
-  .aside-card strong{ color:var(--text); }
 
   /* ---------- Contact / endpoint ---------- */
   .endpoint{
@@ -248,7 +282,10 @@
   }
 
   @media (max-width: 760px){
+    .wrap{ padding:0 16px; }
+    .hero{ padding:44px 0 40px; }
     .hero-grid{ grid-template-columns:1fr; }
+    .tfbody .row .k{ min-width:12ch; }
     .entry-meta{ margin-left:0; }
     nav.links{ display:none; }
   }
@@ -258,8 +295,9 @@
 
 <header class="topbar">
   <div class="wrap">
-    <div class="brand"><span class="dot"></span> tosin-owobo <span style="color:var(--border)">/</span> azure-administrator</div>
+    <div class="brand"><span class="dot"></span> tosin-owobo <span style="color:var(--border)">/</span> cloud-engineer</div>
     <nav class="links">
+      <a href="#projects">Projects</a>
       <a href="#profile">Profile</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
@@ -274,10 +312,11 @@
       <div>
         <p class="eyebrow">Calgary, AB, Canada &nbsp;·&nbsp; Open to in-house / on-site &amp; hybrid roles</p>
         <h1 class="name">Tosin<br>Owobo</h1>
-        <p class="role">Azure Administrator — <span class="accent-word">Identity, Microsoft 365 &amp; Application Support</span></p>
-        <p class="lede">Entra ID and IAM-focused Azure administrator with 5+ years of cloud and systems administration inside a broader 12-year IT support career. Administers identities, RBAC, and enterprise application access day to day — and automates the routine parts with PowerShell, Python, and ARM templates, including support for production AKS workloads.</p>
+        <p class="role">Azure Cloud Engineer — <span class="accent-word">Identity, Infrastructure &amp; the things I build</span></p>
+        <p class="lede">By day I run identity, access and infrastructure across enterprise Azure tenants: Entra ID, RBAC, Key Vault, AKS and network security. Outside of that I build. Animated tech explainers for TechWithTosin, an incident simulator for DevOps engineers, an AI assistant that debugs Kubernetes clusters, and web apps people actually use.</p>
         <div class="cta-row">
-          <a class="btn primary" href="https://www.linkedin.com/in/owobo-tosin/" target="_blank" rel="noopener">↗ LinkedIn</a>
+          <a class="btn primary" href="#projects">↓ See projects</a>
+          <a class="btn" href="https://www.linkedin.com/in/owobo-tosin/" target="_blank" rel="noopener">↗ LinkedIn</a>
           <a class="btn" href="mailto:owobotosin@yahoo.com">✉ owobotosin@yahoo.com</a>
           <a class="btn" href="https://github.com/Teeowo" target="_blank" rel="noopener">↗ github.com/Teeowo</a>
         </div>
@@ -290,11 +329,109 @@
         <div class="tfbody">
           <div><span class="prompt">PS C:\&gt;</span> Get-MgUser -UserId "towobo" | Format-List</div>
           <div class="row"><span class="k">DisplayName</span><span class="v">: Tosin Owobo</span></div>
-          <div class="row"><span class="k">JobTitle</span><span class="v">: Azure Administrator</span></div>
-          <div class="row"><span class="k">Department</span><span class="v">: IT Operations &amp; Support</span></div>
+          <div class="row"><span class="k">JobTitle</span><span class="v">: Azure Cloud Engineer</span></div>
           <div class="row"><span class="k">OfficeLocation</span><span class="v">: Calgary, AB</span></div>
+          <div class="row"><span class="k">SideProjects</span><span class="v">: 6 featured below</span></div>
           <div class="row"><span class="k">AccountEnabled</span><span class="v" style="color:var(--status)">: True</span></div>
-          <div class="cm">&#35; Entra ID · RBAC · ARM · PowerShell · Python</div>
+          <div class="cm">&#35; Entra ID · Terraform · AKS · Python · TypeScript</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">Projects</h2></div>
+      <p class="proj-intro">Things I've designed and built myself, from cloud infrastructure to full apps. Most of the code lives in private repos, so the cards describe the work and link to it wherever there's something live to see. Happy to walk through any of it.</p>
+
+      <div class="proj-group">
+        <h3>Cloud, DevOps &amp; tech content</h3>
+        <div class="proj-grid">
+
+          <article class="proj">
+            <div class="proj-top"><h4>TechWithTosin</h4><span class="badge live">On YouTube</span></div>
+            <p>Short animated explainers that make cloud and DevOps concepts click, including an incident series that walks through real Azure misconfigurations and why they fail.</p>
+            <a class="proj-video" href="https://youtu.be/r275jehCmbQ" target="_blank" rel="noopener">
+              <img src="https://i.ytimg.com/vi/r275jehCmbQ/hqdefault.jpg" alt="Video thumbnail: The Azure Storage Firewall Rule That Did Nothing" loading="lazy" width="480" height="360">
+              <span class="proj-video-cap"><span class="play">▶</span> Incident 003: the Azure Storage firewall rule that did nothing (IP rule vs virtual network rule)</span>
+            </a>
+            <ul>
+              <li>Kubernetes rolling updates, explained with narration and captions</li>
+              <li>An AZ-104 (Azure Administrator) series in the works</li>
+            </ul>
+            <div class="tag-row"><span class="tag">Azure</span><span class="tag">Kubernetes</span><span class="tag">AZ-104</span><span class="tag">Motion graphics</span></div>
+            <div class="proj-links">
+              <a class="btn small" href="https://youtu.be/r275jehCmbQ" target="_blank" rel="noopener">▶ Watch episode</a>
+              <a class="btn small" href="https://www.youtube.com/@techwithtosin" target="_blank" rel="noopener">↗ @techwithtosin</a>
+            </div>
+          </article>
+
+          <article class="proj">
+            <div class="proj-top"><h4>Sample Tracker on AKS</h4><span class="badge wip">Early build</span></div>
+            <p>A web, API and worker app deployed to AKS with secretless access end to end.</p>
+            <ul>
+              <li>AKS workload identity to Key Vault and PostgreSQL, with no stored credentials</li>
+              <li>Key Vault secrets mounted through the CSI SecretProviderClass</li>
+              <li>Helm chart with a migration hook job; Terraform plus OIDC GitHub Actions</li>
+            </ul>
+            <div class="tag-row"><span class="tag">AKS</span><span class="tag">Workload identity</span><span class="tag">Key Vault</span><span class="tag">Helm</span><span class="tag">Terraform</span><span class="tag">Python</span></div>
+          </article>
+
+          <article class="proj">
+            <div class="proj-top"><h4>DevSim: DevOps Incident Simulator</h4><span class="badge working">v0.1</span></div>
+            <p>A local-first training simulator where you work real incidents and change requests using real git and Terraform against simulated Azure, AWS, GCP and Kubernetes.</p>
+            <ul>
+              <li>Scenario engine with gates that check your fix, not just your answer</li>
+              <li>Three playable incident and change scenarios</li>
+              <li>Python engine with a React front end, packaged with Docker</li>
+            </ul>
+            <div class="tag-row"><span class="tag">Python</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Terraform</span><span class="tag">Docker</span></div>
+          </article>
+
+          <article class="proj">
+            <div class="proj-top"><h4>Azure ↔ GCP Paved Road</h4><span class="badge">Practice build</span></div>
+            <p>The same microservice platform built twice, on AKS and on GKE, with one shared Helm chart and reusable pipelines.</p>
+            <ul>
+              <li>AKS + ACR + Entra OIDC alongside GKE + Artifact Registry + Workload Identity Federation</li>
+              <li>Reusable plan/apply workflows and atomic Helm upgrades</li>
+              <li>Health, readiness and metrics probes; dev/staging/prod values</li>
+            </ul>
+            <div class="tag-row"><span class="tag">Terraform</span><span class="tag">Helm</span><span class="tag">AKS</span><span class="tag">GKE</span><span class="tag">GitHub Actions</span></div>
+            <div class="proj-links"><a class="btn small" href="https://github.com/Teeowo/boutique-microservices-project" target="_blank" rel="noopener">↗ View code</a></div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="proj-group">
+        <h3>Apps &amp; AI tools</h3>
+        <div class="proj-grid">
+
+          <article class="proj">
+            <div class="proj-top"><h4>AI Kubernetes Troubleshooter</h4><span class="badge working">Working locally</span></div>
+            <p>Point it at a cluster and it gathers evidence, asks an LLM what's wrong, and comes back with a root cause and a fix.</p>
+            <ul>
+              <li>Reads clusters through a kubeconfig, with live cluster status</li>
+              <li>Saves every investigation to a history you can revisit</li>
+              <li>Tested end to end against local kind clusters</li>
+            </ul>
+            <div class="tag-row"><span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">LLMs</span><span class="tag">Kubernetes</span><span class="tag">Docker Compose</span></div>
+          </article>
+
+          <article class="proj">
+            <div class="proj-top"><h4>Scoreline</h4><span class="badge live">Live</span></div>
+            <p>A league and tournament manager for a group of friends playing EA FC: play, record, compete.</p>
+            <ul>
+              <li>Round-robin and weekly scheduling, with fair handling for late joiners</li>
+              <li>Role-based league admins on Supabase</li>
+              <li>Shipped in versioned releases (v0.7) with a public changelog</li>
+            </ul>
+            <div class="tag-row"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Supabase</span><span class="tag">Postgres</span><span class="tag">Vercel</span></div>
+            <div class="proj-links"><a class="btn small" href="https://scoreline.tosinowobo.com" target="_blank" rel="noopener">↗ Open app</a></div>
+          </article>
+
+
+
         </div>
       </div>
     </div>
@@ -302,9 +439,9 @@
 
   <section id="profile" class="profile">
     <div class="wrap">
-      <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">Profile</h2></div>
-      <p>Microsoft Entra ID and IAM-focused Azure administrator with 5+ years of cloud and systems administration experience and a broader background in enterprise IT support. Hands-on administering Entra ID identities, enterprise applications, RBAC, PIM, managed and workload identities, service accounts, application permissions, SAML and OAuth integrations, Microsoft 365, and access lifecycle processes.</p>
-      <p>Experienced onboarding and supporting enterprise applications, troubleshooting authentication and authorization issues, validating access across environments, and documenting technical procedures — collaborating closely with developers, security, infrastructure, QA, and business stakeholders. Comfortable taking ownership of established operational processes and driving work independently through implementation, testing, troubleshooting, and support.</p>
+      <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Profile</h2></div>
+      <p>Azure cloud engineer with 5+ years of cloud and systems administration inside a 12-year IT career. My day job is identity and access: Entra ID, RBAC, PIM, managed and workload identities, SAML and OAuth integrations, Key Vault, and support for production AKS workloads, with the routine parts automated in PowerShell, Python and ARM templates.</p>
+      <p>The projects above are where I go further: building infrastructure end to end, shipping apps, and putting AI to work on real operations problems.</p>
       <div class="stat-row">
         <div class="stat"><div class="num">12</div><div class="lbl">years in IT &amp; cloud</div></div>
         <div class="stat"><div class="num">5+</div><div class="lbl">years Azure/IAM admin</div></div>
@@ -316,7 +453,7 @@
 
   <section id="experience">
     <div class="wrap">
-      <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Experience</h2></div>
+      <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Experience</h2></div>
       <div class="timeline">
 
         <div class="entry current">
@@ -328,10 +465,8 @@
           <ul>
             <li>Administer Microsoft Entra ID identity and access across enterprise Azure tenants — users, groups, RBAC, privileged access, workload identities, managed identities, service accounts, and application permissions.</li>
             <li>Configure and support authentication and authorization solutions using SAML, OAuth, RBAC, workload/managed identities, and Azure Key Vault for enterprise application integrations.</li>
-            <li>Troubleshoot complex identity and access issues — authentication failures, SSO problems, certificate errors, access-control and service identity failures.</li>
             <li>Automate routine administration with PowerShell, Python, and ARM templates — provisioning, access configuration, alert changes, and operational validation.</li>
             <li>Support production AKS workloads integrated with Microsoft Entra ID, workload identity, Key Vault, RBAC, Kubernetes secrets, and TLS certificates.</li>
-            <li>Administer network security across VNets, subnets, private endpoints, Azure Firewall, and WAF to isolate regulated client workloads.</li>
           </ul>
           <div class="tag-row"><span class="tag">Entra ID</span><span class="tag">RBAC / PIM</span><span class="tag">SAML / OAuth</span><span class="tag">PowerShell / Python</span><span class="tag">ARM Templates</span><span class="tag">AKS support</span></div>
         </div>
@@ -344,10 +479,8 @@
           </div>
           <ul>
             <li>Managed end-to-end onboarding for new hires — Entra ID accounts, Microsoft 365 E3/E5 licensing, group and resource access, day-one readiness.</li>
-            <li>Onboarded laptops and phones into Microsoft Intune: Win32/EXE/MSI app packaging, Windows Autopilot zero-touch provisioning, compliance policies, staged deployment rings.</li>
+            <li>Onboarded devices into Microsoft Intune with Windows Autopilot, app packaging and compliance policies.</li>
             <li>Created and maintained Azure RBAC assignments and custom roles aligned to business requirements and least-privilege access principles.</li>
-            <li>Automated user folder provisioning and access permissions with PowerShell; administered Azure subscriptions, resource groups, and RBAC.</li>
-            <li>Set up workstations and provided on-call IT support across hardware, software, connectivity, and access issues for site staff.</li>
           </ul>
           <div class="tag-row"><span class="tag">Microsoft 365</span><span class="tag">Intune</span><span class="tag">Autopilot</span><span class="tag">PowerShell</span></div>
         </div>
@@ -383,7 +516,7 @@
 
   <section id="skills">
     <div class="wrap">
-      <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Skills &amp; Tooling</h2></div>
+      <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Skills &amp; Tooling</h2></div>
       <div class="skill-groups">
         <div class="skill-group">
           <h3>Identity &amp; Access</h3>
@@ -436,19 +569,12 @@
         </div>
       </div>
 
-      <div class="aside-card" style="margin-top:26px;">
-        <div>
-          <p class="label">Also on GitHub</p>
-          <p><strong>Azure ↔ GCP paved-road practice repo</strong> — a personal Terraform/Kubernetes build exercise. At work, AKS shows up on the identity and support side above, not cluster provisioning.</p>
-        </div>
-        <a class="btn small" href="https://github.com/Teeowo/boutique-microservices-project" target="_blank" rel="noopener">↗ View repo</a>
-      </div>
     </div>
   </section>
 
   <section id="contact">
     <div class="wrap">
-      <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Contact</h2></div>
+      <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Contact</h2></div>
       <div class="endpoint">
         <div class="req"><span class="verb">GET</span> /tosin-owobo/contact</div>
         <div class="res">
