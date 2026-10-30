@@ -9,10 +9,12 @@ layout: default
       <h1 class="post-title">{{ page.title }}</h1>
       {% if page.summary %}<p class="lede">{{ page.summary }}</p>{% endif %}
       {% if page.tags.size > 0 %}<div class="tag-row">{% for t in page.tags %}<span class="tag">{{ t }}</span>{% endfor %}</div>{% endif %}
+      <div class="post-share">{% include share.html %}</div>
     </header>
     <div class="prose">
 {{ content }}
     </div>
+    <div class="post-share end"><p>Found this useful? Pass it on.</p>{% include share.html %}</div>
     <nav class="post-nav">
       {% if page.previous %}<a href="{{ page.previous.url }}"><span class="k">← Week {{ page.previous.week }}</span>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
       {% if page.next %}<a class="next" href="{{ page.next.url }}"><span class="k">Week {{ page.next.week }} →</span>{{ page.next.title }}</a>{% endif %}

@@ -1,7 +1,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% if page.title %}{{ page.title }} · {% endif %}Tosin Owobo</title>
-{% if page.summary %}<meta name="description" content="{{ page.summary | strip_html | escape }}">{% endif %}
+{% assign meta_title = page.title | default: "Tosin Owobo · Azure Cloud Engineer" %}
+{% assign meta_desc = page.summary | default: site.description | strip_html | strip | escape %}
+{% assign meta_image = page.image %}{% if meta_image == nil and page.section == "ai" %}{% assign meta_image = "/assets/og-ai-engineering.png" %}{% endif %}
+<meta name="description" content="{{ meta_desc }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta property="og:site_name" content="Tosin Owobo">
+<meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+<meta property="og:title" content="{{ meta_title | escape }}">
+<meta property="og:description" content="{{ meta_desc }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+{% if meta_image %}<meta property="og:image" content="{{ meta_image | absolute_url }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ meta_image | absolute_url }}">{% else %}<meta name="twitter:card" content="summary">{% endif %}
+<meta name="twitter:title" content="{{ meta_title | escape }}">
+<meta name="twitter:description" content="{{ meta_desc }}">
+{% if page.layout == 'post' %}<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">{% endif %}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
