@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% if page.title %}{{ page.title }} · {% endif %}Tosin Owobo</title>
-{% assign meta_title = page.title | default: "Tosin Owobo · Azure Cloud Engineer" %}
+{% assign meta_title = page.title | default: "Tosin Owobo · Systems Administrator" %}
 {% assign meta_desc = page.summary | default: site.description | strip_html | strip | escape %}
 {% assign meta_image = page.image %}{% if meta_image == nil and page.section == "ai" %}{% assign meta_image = "/assets/og-ai-engineering.png" %}{% endif %}
 <meta name="description" content="{{ meta_desc }}">
