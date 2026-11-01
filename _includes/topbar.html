@@ -1,13 +1,32 @@
 <header class="topbar">
   <div class="wrap">
-    <a class="brand" href="/"><span class="dot"></span> tosin-owobo <span style="color:var(--border)">/</span> {% if page.section == "ai" %}ai-engineering{% else %}sys-admin{% endif %}</a>
-    <nav class="links">
+    <a class="brand" href="/"><span class="dot"></span> tosin-owobo <span class="brand-sub"><span class="sep">/</span> {% if page.section == "ai" %}ai-engineering{% else %}sys-admin{% endif %}</span></a>
+    <button type="button" class="btn small menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="links" id="site-nav" aria-label="Main">
       <a href="/#projects">Projects</a>
       <a href="/ai-engineering/"{% if page.section == "ai" %} class="active" aria-current="page"{% endif %}>AI Engineering</a>
-      <a class="hide-sm" href="/#profile">Profile</a>
-      <a class="hide-sm" href="/#experience">Experience</a>
-      <a class="hide-sm" href="/#skills">Skills</a>
+      <a href="/#profile">Profile</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#skills">Skills</a>
       <a href="/#contact">Contact</a>
     </nav>
   </div>
 </header>
+<script>
+(function(){
+  // Phone menu: the links fold behind a Menu button. Without JS the links simply wrap.
+  var bar = document.currentScript.previousElementSibling;
+  var btn = bar.querySelector('.menu-btn'), nav = bar.querySelector('nav.links');
+  bar.classList.add('has-menu');
+  function set(open, refocus){
+    nav.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+    btn.textContent = open ? 'Close' : 'Menu';
+    if (!open && refocus) btn.focus();
+  }
+  btn.addEventListener('click', function(){ set(!nav.classList.contains('open')); });
+  nav.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && nav.classList.contains('open')) set(false, true); });
+  document.addEventListener('click', function(e){ if (nav.classList.contains('open') && !bar.contains(e.target)) set(false); });
+})();
+</script>

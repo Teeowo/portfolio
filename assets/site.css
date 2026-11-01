@@ -91,6 +91,8 @@
   nav.links a:hover{ color:var(--text); text-decoration:none; }
   nav.links a.active{ color:var(--accent); }
   a.brand:hover{ text-decoration:none; color:var(--text); }
+  .brand .sep{ color:var(--border); }
+  .topbar .menu-btn{ display:none; }
 
   /* ---------- Hero ---------- */
   .hero{ padding:64px 0 56px; }
@@ -184,6 +186,20 @@
   .entry ul{ margin:8px 0 0; padding-left:18px; }
   .entry li{ color:var(--text-muted); margin-bottom:5px; font-size:14.5px; }
   .entry li::marker{ color:var(--accent2); }
+  .entry .more{ margin:0 0 4px; }
+  .entry .more summary{
+    display:inline-flex; align-items:center; gap:6px; cursor:pointer; list-style:none;
+    font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:12.5px; color:var(--accent2);
+    padding:4px 0; border-radius:2px;
+  }
+  .entry .more summary::-webkit-details-marker{ display:none; }
+  .entry .more summary::before{ content:"+"; width:1ch; }
+  .entry .more[open] summary::before{ content:"−"; }
+  .entry .more summary:hover{ text-decoration:underline; }
+  .entry .more summary:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  .entry .more .opened, .entry .more[open] .closed{ display:none; }
+  .entry .more[open] .opened{ display:inline; }
+  .entry .more ul{ margin-top:2px; }
   .tag-row{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
   .tag{
     font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:11px; color:var(--text-muted);
@@ -307,6 +323,19 @@
   .prose pre{ background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; overflow-x:auto; font-size:13.5px; line-height:1.6; }
   .prose pre code{ background:none; border:0; padding:0; }
   .prose blockquote{ margin:0 0 16px; padding:4px 0 4px 16px; border-left:3px solid var(--accent); color:var(--text-muted); }
+  .prose .table-scroll{ overflow-x:auto; margin:0 0 18px; border:1px solid var(--border); border-radius:8px; background:var(--surface); }
+  .prose table{ width:100%; border-collapse:collapse; font-size:14px; line-height:1.45; }
+  .prose th, .prose td{ text-align:left; vertical-align:top; padding:10px 12px; border-bottom:1px solid var(--border); }
+  .prose th{ font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); background:var(--surface-2); }
+  .prose tr:last-child td{ border-bottom:0; }
+  @media (max-width: 560px){
+    .prose table, .prose thead, .prose tbody, .prose tr, .prose th, .prose td{ display:block; }
+    .prose thead{ display:none; }
+    .prose td{ border-bottom:0; padding:6px 12px; }
+    .prose tr{ padding:6px 0; border-bottom:1px solid var(--border); }
+    .prose tr:last-child{ border-bottom:0; }
+    .prose td::before{ content:attr(data-label); display:block; font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); }
+  }
   .prose hr{ border:0; border-top:1px solid var(--border); margin:30px 0; }
   .prose a{ text-decoration:underline; text-underline-offset:2px; }
   .post-nav{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:44px; padding-top:24px; border-top:1px solid var(--border); }
@@ -330,16 +359,32 @@
     font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:12px; color:var(--text-muted);
   }
 
+  /* Phone and narrow tablet: links fold behind the Menu button (JS adds .has-menu).
+     Without JS they wrap under the name instead. */
+  @media (max-width: 900px){
+    .topbar:not(.has-menu) .wrap{ flex-wrap:wrap; height:auto; min-height:56px; padding-block:8px; gap:4px 16px; }
+    .topbar:not(.has-menu) nav.links{ flex-wrap:wrap; gap:4px 16px; }
+    .has-menu .menu-btn{ display:inline-flex; }
+    .has-menu nav.links{
+      display:none; position:absolute; top:100%; left:0; right:0;
+      flex-direction:column; gap:0; padding:4px 32px 8px;
+      background:var(--bg); border-bottom:1px solid var(--border); box-shadow:var(--shadow);
+    }
+    .has-menu nav.links.open{ display:flex; }
+    .has-menu nav.links a{ padding:12px 0; font-size:15px; border-bottom:1px solid var(--border); }
+    .has-menu nav.links a:last-child{ border-bottom:0; }
+  }
+  @media (max-width: 480px){
+    .brand-sub{ display:none; }
+  }
+
   @media (max-width: 760px){
     .wrap{ padding:0 16px; }
+    .has-menu nav.links{ padding-inline:16px; }
     .hero{ padding:44px 0 40px; }
     .hero-grid{ grid-template-columns:1fr; }
     .tfbody .row .k{ min-width:12ch; }
     .entry-meta{ margin-left:0; }
-    .topbar .brand{ display:none; }
-    nav.links{ gap:16px; width:100%; justify-content:space-between; }
-    nav.links a{ font-size:13.5px; }
-    nav.links .hide-sm{ display:none; }
     .log-item{ grid-template-columns:1fr; gap:6px; }
     .log-meta{ flex-direction:row; gap:10px; }
     .post-nav{ grid-template-columns:1fr; }

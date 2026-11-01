@@ -7,12 +7,12 @@ layout: default
         <p class="eyebrow">Calgary, AB, Canada &nbsp;·&nbsp; Available now for on-site &amp; hybrid roles</p>
         <h1 class="name">Tosin<br>Owobo</h1>
         <p class="role">Systems Administrator — <span class="accent-word">Azure, Microsoft 365 &amp; the things I build</span></p>
-        <p class="lede">Systems administrator with 10+ years in IT. Most recently at Arborsys Group, I administered production Azure environments across 10+ regulated client tenants: Entra ID, RBAC, Conditional Access, Key Vault and AKS. Outside of that I build. Animated tech explainers for TechWithTosin, an incident simulator for DevOps engineers, an AI assistant that debugs Kubernetes clusters, and web apps people actually use.</p>
+        <p class="lede">Systems administrator with 10+ years in IT. Most recently I administered production Azure environments across 10+ regulated client tenants at Arborsys Group, with identity and access at the core, and I build the tools, apps and explainers below.</p>
         <div class="cta-row">
           <a class="btn primary" href="#projects">↓ See projects</a>
+          <a class="btn" href="mailto:owobotosin@yahoo.com">✉ Email me</a>
           <a class="btn" href="https://www.linkedin.com/in/owobo-tosin/" target="_blank" rel="noopener">↗ LinkedIn</a>
-          <a class="btn" href="mailto:owobotosin@yahoo.com">✉ owobotosin@yahoo.com</a>
-          <a class="btn" href="https://github.com/Teeowo" target="_blank" rel="noopener">↗ github.com/Teeowo</a>
+          <a class="btn" href="https://github.com/Teeowo" target="_blank" rel="noopener">↗ GitHub</a>
         </div>
       </div>
       <div class="tfcard">
@@ -25,7 +25,7 @@ layout: default
           <div class="row"><span class="k">DisplayName</span><span class="v">: Tosin Owobo</span></div>
           <div class="row"><span class="k">JobTitle</span><span class="v">: Systems Administrator</span></div>
           <div class="row"><span class="k">OfficeLocation</span><span class="v">: Calgary, AB</span></div>
-          <div class="row"><span class="k">SideProjects</span><span class="v">: 6 featured below</span></div>
+          <div class="row"><span class="k">SideProjects</span><span class="v">: 4 featured below</span></div>
           <div class="row"><span class="k">Availability</span><span class="v" style="color:var(--status)">: Immediate</span></div>
           <div class="cm">&#35; Entra ID · Terraform · AKS · Python · TypeScript</div>
         </div>
@@ -61,17 +61,6 @@ layout: default
           </article>
 
           <article class="proj">
-            <div class="proj-top"><h4>Sample Tracker on AKS</h4><span class="badge wip">Early build</span></div>
-            <p>A web, API and worker app deployed to AKS with secretless access end to end.</p>
-            <ul>
-              <li>AKS workload identity to Key Vault and PostgreSQL, with no stored credentials</li>
-              <li>Key Vault secrets mounted through the CSI SecretProviderClass</li>
-              <li>Helm chart with a migration hook job; Terraform plus OIDC GitHub Actions</li>
-            </ul>
-            <div class="tag-row"><span class="tag">AKS</span><span class="tag">Workload identity</span><span class="tag">Key Vault</span><span class="tag">Helm</span><span class="tag">Terraform</span><span class="tag">Python</span></div>
-          </article>
-
-          <article class="proj">
             <div class="proj-top"><h4>DevSim: DevOps Incident Simulator</h4><span class="badge working">v0.1</span></div>
             <p>A local-first training simulator where you work real incidents and change requests using real git and Terraform against simulated Azure, AWS, GCP and Kubernetes.</p>
             <ul>
@@ -80,6 +69,7 @@ layout: default
               <li>Python engine with a React front end, packaged with Docker</li>
             </ul>
             <div class="tag-row"><span class="tag">Python</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Terraform</span><span class="tag">Docker</span></div>
+            <div class="proj-links"><a class="btn small" href="mailto:owobotosin@yahoo.com?subject=DevSim%20walkthrough">✉ Request a walkthrough</a></div>
           </article>
 
           <article class="proj">
@@ -98,19 +88,8 @@ layout: default
       </div>
 
       <div class="proj-group">
-        <h3>Apps &amp; AI tools</h3>
+        <h3>Apps</h3>
         <div class="proj-grid">
-
-          <article class="proj">
-            <div class="proj-top"><h4>AI Kubernetes Troubleshooter</h4><span class="badge working">Working locally</span></div>
-            <p>Point it at a cluster and it gathers evidence, asks an LLM what's wrong, and comes back with a root cause and a fix.</p>
-            <ul>
-              <li>Reads clusters through a kubeconfig, with live cluster status</li>
-              <li>Saves every investigation to a history you can revisit</li>
-              <li>Tested end to end against local kind clusters</li>
-            </ul>
-            <div class="tag-row"><span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">LLMs</span><span class="tag">Kubernetes</span><span class="tag">Docker Compose</span></div>
-          </article>
 
           <article class="proj">
             <div class="proj-top"><h4>Scoreline</h4><span class="badge live">Live</span></div>
@@ -123,8 +102,6 @@ layout: default
             <div class="tag-row"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Supabase</span><span class="tag">Postgres</span><span class="tag">Vercel</span></div>
             <div class="proj-links"><a class="btn small" href="https://scoreline.tosinowobo.com" target="_blank" rel="noopener">↗ Open app</a></div>
           </article>
-
-
 
         </div>
       </div>
@@ -158,13 +135,18 @@ layout: default
           </div>
           <ul>
             <li>Troubleshot identity and access issues affecting users onboarding applications, resolving authentication failures, authorization issues, SSO problems, certificate errors, access misconfiguration, and service identity failures as part of application support.</li>
-            <li>Administered and troubleshot Linux-based AKS production environments, using SSH and VS Code to investigate worker-node health, resource pressure, filesystem, networking, and container-runtime issues.</li>
-            <li>Utilized Terraform and ARM Templates for VNets, AKS, Storage Accounts, Key Vault, and private networking, improving deployment consistency and eliminating manual configuration errors.</li>
-            <li>Automated environment provisioning, certificate and secret changes, deployment rollbacks, container image imports, alert configuration, and repeatable operational tasks using Terraform, PowerShell, and pipeline orchestration.</li>
             <li>Troubleshot Kubernetes application and infrastructure issues involving pods, deployments, services, ingress, load balancers, PV/PVC storage, TLS certificates, secrets, DNS, networking, CPU and memory pressure, and container failures, using Kubernetes and OS-level diagnostic tooling.</li>
-            <li>Coordinated production releases and maintenance windows, performing readiness checks, deployment validation, troubleshooting, rollback and recovery actions, and post-change monitoring through environment stabilization.</li>
             <li>Built the platform’s observability layer using Azure Monitor, Application Insights, and Log Analytics, and led incident response, root cause analysis, and post-mortem reviews, reducing MTTR and repeat outages.</li>
           </ul>
+          <details class="more">
+            <summary><span class="closed">Show 4 more</span><span class="opened">Show less</span></summary>
+            <ul>
+              <li>Administered and troubleshot Linux-based AKS production environments, using SSH and VS Code to investigate worker-node health, resource pressure, filesystem, networking, and container-runtime issues.</li>
+              <li>Utilized Terraform and ARM Templates for VNets, AKS, Storage Accounts, Key Vault, and private networking, improving deployment consistency and eliminating manual configuration errors.</li>
+              <li>Automated environment provisioning, certificate and secret changes, deployment rollbacks, container image imports, alert configuration, and repeatable operational tasks using Terraform, PowerShell, and pipeline orchestration.</li>
+              <li>Coordinated production releases and maintenance windows, performing readiness checks, deployment validation, troubleshooting, rollback and recovery actions, and post-change monitoring through environment stabilization.</li>
+            </ul>
+          </details>
           <div class="tag-row"><span class="tag">Entra ID</span><span class="tag">SSO</span><span class="tag">AKS</span><span class="tag">Terraform / ARM</span><span class="tag">PowerShell</span><span class="tag">Azure Monitor</span><span class="tag">Incident response</span></div>
         </div>
 
@@ -177,10 +159,15 @@ layout: default
           <ul>
             <li>Managed end-to-end onboarding for new hires, creating Microsoft Entra ID accounts, assigning Microsoft 365 E3/E5 licences, configuring group memberships and resource access, and preparing users for day-one productivity.</li>
             <li>Managed enterprise applications in Azure and supported their onboarding by configuring identity and access requirements, including Microsoft Entra ID permissions, SSO dependencies, service accounts, managed identities, certificates, and secrets.</li>
-            <li>Supported Microsoft 365 and SharePoint Online licensing, user access, and collaboration services.</li>
             <li>Managed enterprise Microsoft Intune endpoint deployment, including device compliance policies, Windows Autopilot zero-touch provisioning, and staged application deployment rings.</li>
-            <li>Onboarded corporate laptops into Microsoft Intune and deployed managed applications by packaging and uploading Win32, EXE, and MSI installers, and extended Intune mobile device management to company phones.</li>
           </ul>
+          <details class="more">
+            <summary><span class="closed">Show 2 more</span><span class="opened">Show less</span></summary>
+            <ul>
+              <li>Supported Microsoft 365 and SharePoint Online licensing, user access, and collaboration services.</li>
+              <li>Onboarded corporate laptops into Microsoft Intune and deployed managed applications by packaging and uploading Win32, EXE, and MSI installers, and extended Intune mobile device management to company phones.</li>
+            </ul>
+          </details>
           <div class="tag-row"><span class="tag">Microsoft 365</span><span class="tag">SharePoint Online</span><span class="tag">Intune</span><span class="tag">Autopilot</span><span class="tag">Entra ID</span></div>
         </div>
 
