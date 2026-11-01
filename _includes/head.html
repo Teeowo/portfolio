@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% if page.title %}{{ page.title }} · {% endif %}Tosin Owobo</title>
+<title>{% if page.title %}{{ page.title | escape }} · Tosin Owobo{% else %}Tosin Owobo · Systems Administrator{% endif %}</title>
 {% assign meta_title = page.title | default: "Tosin Owobo · Systems Administrator" %}
 {% assign meta_desc = page.summary | default: site.description | strip_html | strip | escape %}
 {% assign meta_image = page.image %}{% if meta_image == nil and page.section == "ai" %}{% assign meta_image = "/assets/og-ai-engineering.png" %}{% endif %}
@@ -22,6 +22,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
-<link rel="alternate" type="application/atom+xml" title="AI Engineering · Tosin Owobo" href="/ai-engineering/feed.xml">
+{% if page.section == "ai" %}<script src="/assets/share.js" defer></script>
+{% endif %}<link rel="alternate" type="application/atom+xml" title="AI Engineering · Tosin Owobo" href="/ai-engineering/feed.xml">

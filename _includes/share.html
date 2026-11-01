@@ -9,25 +9,3 @@
   <a class="btn small" href="https://x.com/intent/post?url={{ share_url | url_encode }}&text={{ share_text | strip | url_encode }}" target="_blank" rel="noopener">X</a>
   <span class="share-status" role="status" aria-live="polite"></span>
 </div>
-<script>
-(function(){
-  var box = document.currentScript.previousElementSibling;
-  var btn = box.querySelector('.share-btn'), status = box.querySelector('.share-status');
-  var url = box.dataset.url, title = box.dataset.title;
-  var label = btn.querySelector('.share-label');
-  function say(msg){
-    status.textContent = msg; label.textContent = 'Copied';
-    clearTimeout(say.t); say.t = setTimeout(function(){ status.textContent = ''; label.textContent = 'Share'; }, 2000);
-  }
-  function copy(){
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(url).then(function(){ say('Link copied'); }, function(){ prompt('Copy this link:', url); });
-    } else { prompt('Copy this link:', url); }
-  }
-  btn.addEventListener('click', function(){
-    if (navigator.share && matchMedia('(pointer: coarse)').matches) {
-      navigator.share({ title: title, url: url }).catch(function(){});
-    } else { copy(); }
-  });
-})();
-</script>
