@@ -336,6 +336,9 @@
     .prose tr:last-child{ border-bottom:0; }
     .prose td::before{ content:attr(data-label); display:block; font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); }
   }
+  .prose .post-figure{ margin:0 0 20px; }
+  .prose .post-figure img{ display:block; width:100%; height:auto; border:1px solid var(--border); border-radius:8px; }
+  .prose .post-figure figcaption{ margin-top:8px; font-size:13.5px; color:var(--text-muted); }
   .prose hr{ border:0; border-top:1px solid var(--border); margin:30px 0; }
   .prose a{ text-decoration:underline; text-underline-offset:2px; }
   .post-nav{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:44px; padding-top:24px; border-top:1px solid var(--border); }
